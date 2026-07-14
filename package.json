@@ -1,0 +1,25 @@
+{
+  "name": "upvote-club-mcp-remote",
+  "version": "1.0.0",
+  "description": "Remote Streamable HTTP MCP server for Upvote.club Public API",
+  "type": "module",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "test": "node --test test/smoke.test.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "author": "Upvote.club <yes@upvote.club>",
+  "license": "MIT",
+  "homepage": "https://upvote.club/api",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alxgntv/upvote-club-mcp-remote.git"
+  },
+  "dependencies": {
+    "@upvote-club/mcp-core": "github:alxgntv/upvote-club-mcp-core",
+    "@modelcontextprotocol/sdk": "^1.12.0"
+  }
+}
