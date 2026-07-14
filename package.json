@@ -16,10 +16,10 @@
   "homepage": "https://upvote.club/api",
   "repository": {
     "type": "git",
-    "url": "https://github.com/alxgntv/upvote-club-mcp-remote.git"
+    "url": "https://github.com/upvoteclub/upvote-club-mcp-remote.git"
   },
   "dependencies": {
-    "@upvote-club/mcp-core": "github:alxgntv/upvote-club-mcp-core",
+    "@upvote-club/mcp-core": "github:upvoteclub/upvote-club-mcp-core",
     "@modelcontextprotocol/sdk": "^1.12.0"
   }
 }
