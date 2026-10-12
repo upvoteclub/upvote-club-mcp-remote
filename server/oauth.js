@@ -4,11 +4,8 @@ const DEFAULT_RESOURCE_METADATA_URL =
   "https://mcp.upvote.club/.well-known/oauth-protected-resource";
 
 
-function singleHeaderValue(value) {
-  if (Array.isArray(value)) {
-    return value[0] || "";
-  }
-  return typeof value === "string" ? value.trim() : "";
+function headerValue(headers, name) {
+  return (headers.get(name) || "").trim();
 }
 
 function canonicalResource(value) {
@@ -84,14 +81,14 @@ export function oauthChallenge(
 //          [AT-2237] backend→api/public_api_views.py:_authenticate_public_api_request
 // ─────────────────────────────────────────────────────
 export async function resolveRequestAuthentication(
-  req,
+  headers,
   {
     config = getRemoteOAuthConfig(),
     logPrefix = "[upvote-mcp-remote]",
   } = {},
 ) {
-  const apiKey = singleHeaderValue(req.headers["x-api-key"]);
-  const authorization = singleHeaderValue(req.headers.authorization);
+  const apiKey = headerValue(headers, "x-api-key");
+  const authorization = headerValue(headers, "authorization");
 
   if (apiKey && authorization) {
     console.error(`${logPrefix} Authentication rejected: multiple credential types`);

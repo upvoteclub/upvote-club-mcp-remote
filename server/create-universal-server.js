@@ -1,20 +1,11 @@
-import fs from "node:fs/promises";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { registerUpvoteClubTools } from "@upvote-club/mcp-core";
 import { z } from "zod";
 
+import { TASK_STATUS_HTML } from "../ui/task-status-html.js";
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 const TASK_STATUS_UI_URI = "ui://upvote-club/task-status.html";
-const TASK_STATUS_UI_PATH = path.join(
-  __dirname,
-  "..",
-  "ui",
-  "task-status.html",
-);
 const MCP_APP_MIME_TYPE = "text/html;profile=mcp-app";
 const TASK_READ_SECURITY_SCHEMES = [
   { type: "oauth2", scopes: ["tasks:read"] },
@@ -138,15 +129,14 @@ export function createUniversalUpvoteClubServer(config = {}) {
     },
     async () => {
       console.error(
-        `${logPrefix} Resource read: ${TASK_STATUS_UI_URI} path=${TASK_STATUS_UI_PATH}`,
+        `${logPrefix} Resource read: ${TASK_STATUS_UI_URI} bytes=${TASK_STATUS_HTML.length}`,
       );
-      const html = await fs.readFile(TASK_STATUS_UI_PATH, "utf-8");
       return {
         contents: [
           {
             uri: TASK_STATUS_UI_URI,
             mimeType: MCP_APP_MIME_TYPE,
-            text: html,
+            text: TASK_STATUS_HTML,
             _meta: {
               ui: {
                 prefersBorder: true,

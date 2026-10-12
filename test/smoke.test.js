@@ -263,6 +263,16 @@ test("universal remote MCP supports OAuth and API-key clients", async () => {
       { method: "OPTIONS" },
     );
     assert.equal(preflightResponse.status, 204);
+    assert.match(
+      preflightResponse.headers.get("access-control-expose-headers"),
+      /WWW-Authenticate/,
+    );
+
+    const streamResponse = await fetch(`http://127.0.0.1:${remotePort}/mcp`, {
+      method: "GET",
+      headers: { "X-API-Key": "upv_test_key" },
+    });
+    assert.equal(streamResponse.status, 405);
   } finally {
     child.kill("SIGTERM");
     await closeServer(upstream);

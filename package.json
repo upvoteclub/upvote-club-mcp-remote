@@ -3,13 +3,20 @@
   "version": "2.0.0",
   "description": "Universal remote MCP server for Upvote.club with Streamable HTTP, OAuth 2.1, API keys, and MCP Apps UI",
   "type": "module",
-  "main": "server/index.js",
+  "main": "server/handler.js",
+  "types": "server/handler.d.ts",
+  "exports": {
+    ".": {
+      "types": "./server/handler.d.ts",
+      "default": "./server/handler.js"
+    }
+  },
   "scripts": {
     "start": "node server/index.js",
     "test": "node --test test/smoke.test.js"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=20.0.0"
   },
   "author": "Upvote.club <yes@upvote.club>",
   "license": "MIT",
@@ -22,6 +29,7 @@
     "url": "https://github.com/upvoteclub/upvote-club-mcp-core/issues"
   },
   "dependencies": {
+    "@hono/node-server": "^2.1.4",
     "@upvote-club/mcp-core": "github:upvoteclub/upvote-club-mcp-core",
     "@modelcontextprotocol/sdk": "^1.32.1",
     "zod": "^3.25.76"

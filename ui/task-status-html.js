@@ -1,4 +1,5 @@
-<!doctype html>
+// Inlined so bundlers (Next.js on Vercel) ship the MCP App without filesystem tracing.
+export const TASK_STATUS_HTML = `<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -209,7 +210,7 @@
       function showMessage(message, isError = false) {
         tasksElement.replaceChildren();
         const paragraph = document.createElement("p");
-        paragraph.className = `message${isError ? " error" : ""}`;
+        paragraph.className = isError ? "message error" : "message";
         paragraph.textContent = message;
         tasksElement.appendChild(paragraph);
       }
@@ -249,7 +250,7 @@
 
           const title = document.createElement("span");
           title.textContent =
-            `#${task.id} · ${task.type || task.task_type || "TASK"}`;
+            "#" + task.id + " · " + (task.type || task.task_type || "TASK");
 
           const status = document.createElement("span");
           status.className = "status";
@@ -261,10 +262,10 @@
           counts.className = "task-counts";
 
           const actionCount = document.createElement("span");
-          actionCount.textContent = `${completed} / ${required} actions`;
+          actionCount.textContent = completed + " / " + required + " actions";
 
           const percentText = document.createElement("span");
-          percentText.textContent = `${percentage}%`;
+          percentText.textContent = percentage + "%";
 
           counts.append(actionCount, percentText);
 
@@ -277,7 +278,7 @@
 
           const progress = document.createElement("div");
           progress.className = "progress";
-          progress.style.width = `${percentage}%`;
+          progress.style.width = percentage + "%";
 
           track.appendChild(progress);
           article.append(heading, counts, track);
@@ -369,3 +370,4 @@
     </script>
   </body>
 </html>
+`;

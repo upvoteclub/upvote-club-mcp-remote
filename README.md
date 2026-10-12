@@ -28,6 +28,19 @@ curl http://localhost:8787/health
 
 For local API-key calls, send `X-API-Key: upv_...` in the MCP client configuration.
 
+## Production deployment
+
+Production runs inside the Upvote.club Next.js app on Vercel. The package exports one Fetch API handler that the app mounts on `/mcp` and `/.well-known/oauth-protected-resource` for the `mcp.upvote.club` host:
+
+```js
+import { createUpvoteClubMcpHandler } from "upvote-club-mcp-remote";
+
+const handleMcpRequest = createUpvoteClubMcpHandler();
+export { handleMcpRequest as POST, handleMcpRequest as OPTIONS };
+```
+
+`npm start` serves the same handler as a standalone Node server (Node 20+).
+
 ## Authentication
 
 1. **OAuth 2.1:** ChatGPT and OAuth-capable hosts open Upvote.club sign-in. Access is issued only to active MEMBER or MATE accounts.
